@@ -1,0 +1,8 @@
+## Interface: 70200
+## Title: Lib: Exality
+## Notes: Some Shit to not have to deal with
+## Author: Exality
+## X-Category: Library
+## Version: 1
+
+LibExality.lua
