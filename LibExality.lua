@@ -19,9 +19,6 @@ local format   = _G.format
 local ceil     = _G.math.ceil
 
 EXALIB = {}
-EXALIB.Test = addonName
-EXALIB.Test2 = arg1
--- general utility
 
 EXALIB.ShortenNumber = function(number,digits)
 	digits = tonumber(digits) or 0 -- error
@@ -43,7 +40,7 @@ EXALIB.ShortenNumber = function(number,digits)
 end
 
 EXALIB.ClassColour = function(class)
-if class == "Paladin" then
+	if class == "Paladin" then
         return  0.96,0.55,0.73,1
     elseif class == "Mage" then
         return 0.41,0.8,0.94,1
@@ -69,8 +66,6 @@ if class == "Paladin" then
         return 0.64,0.19,0.79,1
     end
     return 0.2,0.72,0.06,1
-
-
 end
 
 EXALIB.UnitColor = function(unit)
