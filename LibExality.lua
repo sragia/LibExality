@@ -194,3 +194,60 @@ EXALIB.SpellOnCDCharges = function(id,item)
 		return false
 	end
 end
+
+function EXALIB.UnitColorText(unit)
+	if not unit then return end
+	if UnitExists(unit) then
+		local targetName = UnitName(unit) or ""
+		local color
+		if UnitIsPlayer(unit) then
+			local class, key = UnitClassBase(unit)
+			color = key and RAID_CLASS_COLORS[key].colorStr or "ffffffff"
+		else
+			local reaction = UnitReaction(unit, 'player') or 5
+			local col = FACTION_BAR_COLORS[reaction]
+			color = string.format("ff%02x%02x%02x", col.r * 255, col.g * 255, col.b * 255)
+		end
+		if strlen(targetName) > 20 then
+			targetName = string.sub(targetName, 0, 19) .. "..."
+		end
+		return string.format("|c%s%s", color, targetName)
+	else
+		return ""
+	end
+end
+function EXALIB.shortenNumber = function(number)
+	-- by Hamsda
+	local affixes = {
+		"",
+		"k",
+		"m",
+		"b",
+	}
+	local affix = 1
+	local dec = 0
+	while number >= 1000 and affix < #affixes do
+		number = number / 1000
+		affix = affix + 1
+	end
+	if affix > 1 then
+		dec = 2
+		local num2 = number
+		while num2 >= 10 and dec > 0 do
+			num2 = num2 / 10
+			dec = dec - 1
+		end
+	end
+	return string.format("%."..dec.."f"..affixes[affix], number)
+end
+
+function EXALIB.ColorHexToDec(hex)
+  if not hex or strlen(hex) < 6 then return end
+  local values = {}
+  for i = 1, 6, 2 do
+    table.insert(values, tonumber(string.sub(hex, i, i + 1), 16))
+  end
+  return (values[1]/ 255),
+				 (values[2]/ 255),
+				 (values[3]/ 255)
+end
